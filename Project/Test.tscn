@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://KinematicBody2D.cs" type="Script" id=1]
+[ext_resource path="res://Assets/astronaut.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Root" type="Node2D"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 461.699, 333.125 )
+motion/sync_to_physics = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 0.371614, 0.0743356 )
+scale = Vector2( 0.314813, 0.319458 )
+texture = ExtResource( 2 )
+
+[node name="Planets" type="Node" parent="."]
+
+[node name="Node" type="Node" parent="Planets"]
