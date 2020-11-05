@@ -1,6 +1,6 @@
 using Godot;
 
-public class Player : Godot.KinematicBody2D
+public class PlayerScript : Godot.KinematicBody2D
 {
 	float rotation_speed = 0.08f;
 	float movement_speed = 5;
