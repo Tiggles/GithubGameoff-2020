@@ -3,14 +3,14 @@ using System;
 
 public class Planets : Node
 {
-	readonly int base_size = 64;
+	readonly int base_size = 32;
 
 
 	public override void _Ready() {
-		this.AddChild(this.NewPlanet(5, 64, 50, 100));
-		this.AddChild(this.NewPlanet(5, 64, 100, 50));
-		this.AddChild(this.NewPlanet(5, 64, 50, 50));
-		this.AddChild(this.NewPlanet(5, 64, 100, 100));
+		this.AddChild(this.NewPlanet(5, 32, 50, 100));
+		this.AddChild(this.NewPlanet(5, 32, 100, 50));
+		this.AddChild(this.NewPlanet(5, 32, 50, 50));
+		this.AddChild(this.NewPlanet(5, 32, 100, 100));
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,7 +21,6 @@ public class Planets : Node
 
 	private Node NewPlanet(float mass, float radius, int x, int y) {
 		var scale = radius / this.base_size;
-		GD.Print(scale);
 		var scale_vec = new Vector2(scale, scale);
 
 		var node = new Node();
@@ -33,21 +32,20 @@ public class Planets : Node
 		{
 			Radius = radius,
 		};
+
 		var collision_shape = new CollisionShape2D
 		{
-			Shape = shape,
-			Scale = scale_vec
+			Shape = shape
 		};
-		collision_shape.Scale = new Vector2(scale, scale);
 
 		var sprite = new Sprite {
 			Texture = GD.Load<Texture>("res://Assets/planet.png")
 		};
-		sprite.Scale = scale_vec;
 		body.AddChild(collision_shape);
 		body.AddChild(sprite);
 		node.AddChild(body);
-
+		
+		body.Scale = scale_vec;
 		return node;
 	}
 }
