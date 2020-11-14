@@ -7,17 +7,11 @@ public class Planets : Node
 
 
 	public override void _Ready() {
-		this.AddChild(this.NewPlanet(5, 32, 50, 100));
-		this.AddChild(this.NewPlanet(5, 32, 100, 50));
 		this.AddChild(this.NewPlanet(5, 32, 50, 50));
-		this.AddChild(this.NewPlanet(5, 32, 100, 100));
+		this.AddChild(this.NewPlanet(5, 32, 400, 50));
+		this.AddChild(this.NewPlanet(5, 32, 400, 400));
+		this.AddChild(this.NewPlanet(5, 32, 50, 400));
 	}
-
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-	//  public override void _Process(float delta)
-	//  {
-	//      
-	//  }
 
 	private Node NewPlanet(float mass, float radius, int x, int y) {
 		var scale = radius / this.base_size;
@@ -46,6 +40,12 @@ public class Planets : Node
 		node.AddChild(body);
 		
 		body.Scale = scale_vec;
+		
+		foreach (var b in body.GetPropertyList()) {
+			GD.Print(b);
+		}
+
+		GD.Print(body.Get("mass"));
 		return node;
 	}
 }
