@@ -28,6 +28,7 @@ public class Planet : KinematicBody2D
 	public override void _PhysicsProcess(float delta) {}
 
 	public Vector2 GetGravityPull(Vector2 player_position) {
+
 		var vec = new Vector2(0, 0);
 		var planet_position = this.Position;
 
