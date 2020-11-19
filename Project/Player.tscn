@@ -6,7 +6,6 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 461.699, 333.125 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

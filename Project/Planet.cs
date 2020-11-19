@@ -3,15 +3,13 @@ using System;
 
 public class Planet : KinematicBody2D
 {
-	readonly private double mass;
-	readonly private double radius;
+	readonly private float mass = 10;
 	readonly private int IMAGE_WIDTH = 64;
 	
 	public Planet() {}
 
-	public Planet(double mass, double radius) {
+	public Planet(float mass) {
 		this.mass = mass;
-		this.radius = radius;
 	}
 
 	public override void _Ready() {
@@ -30,10 +28,42 @@ public class Planet : KinematicBody2D
 	
 	public override void _PhysicsProcess(float delta) {}
 
-	public Vector2 GetGravityPull(Player player) {
+	public Vector2 GetGravityPull(Vector2 player_position) {
 		var vec = new Vector2();
+		var planet_position = this.Position;
 
 
-		return vec;
+		var difference = new Vector2(
+			this.Position.x - player_position.x,
+			this.Position.y - player_position.y
+		);
+
+		var abs_x = Math.Abs(difference.x);
+		var abs_y = Math.Abs(difference.y);
+
+		if (planet_position.x < player_position.x) {
+			vec.x = -0.2f * abs_x;
+		} else {
+			vec.x = 0.2f  * abs_x;
+		}
+
+		if (planet_position.y < player_position.y) {
+			vec.y = -0.2f * abs_y;
+		} else {
+			vec.y = 0.2f * abs_y;
+		}
+
+		if (abs_x - mass < 0) {
+			vec.x = 0;
+		}
+
+		if (abs_y - mass < 0) {
+			vec.y = 0;
+		}
+
+		var distance = (float) Math.Sqrt(Math.Pow(difference.x, 2) + Math.Pow(difference.y, 2));
+
+		var normalized = vec.Normalized();
+		return normalized;
 	}
 }

@@ -13,11 +13,7 @@
 position = Vector2( 262.359, 459.128 )
 
 [node name="KinematicBody2D2" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 685.329, 453.242 )
-
-[node name="KinematicBody2D3" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 280.859, 178.27 )
-scale = Vector2( 4, 4 )
+position = Vector2( 521.354, 68.9533 )
 
 [node name="KinematicBody2D4" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 687.851, 184.156 )
+position = Vector2( 815.667, 464.174 )

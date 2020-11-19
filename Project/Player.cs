@@ -13,8 +13,12 @@ public class Player : Godot.KinematicBody2D
 
 		var planets = GetTree().Root.GetNode("./Root/Planets").GetChildren();
 
+
+		var player_center = new Vector2(this.Position.x, this.Position.y);
+
 		foreach (var planet in planets) {
-			vec += ((Planet) planet).GetGravityPull(this);
+			vec += ((Planet) planet).GetGravityPull(player_center);
+			GD.Print(vec);
 		}
 
 
