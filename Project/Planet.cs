@@ -19,11 +19,10 @@ public class Planet : KinematicBody2D
 		var circle = (CircleShape2D) shape.Shape;
 		var radius = circle.Radius;
 		GD.Print(radius);
-		var image_to_radius_scale = (IMAGE_WIDTH / radius) / 2;
+		var image_to_radius_scale = (radius / IMAGE_WIDTH) * 2;
 		GD.Print(image_to_radius_scale);
-		shape.Scale = new Vector2(image_to_radius_scale, image_to_radius_scale);
 		var sprite = this.GetNode<Sprite>("./Sprite");
-		sprite.Scale = new Vector2(1, 1);
+		sprite.Scale = new Vector2(image_to_radius_scale, image_to_radius_scale);
 		sprite.Texture = GD.Load<Texture>("res://Assets/planet.png");
 
 
