@@ -3,13 +3,13 @@ using System;
 
 public class Planet : KinematicBody2D
 {
-	readonly private float mass = 10;
+	private float distance_threshold = 0;
 	readonly private int IMAGE_WIDTH = 64;
 	
 	public Planet() {}
 
-	public Planet(float mass) {
-		this.mass = mass;
+	public Planet(float distance_threshold) {
+		this.distance_threshold = distance_threshold;
 	}
 
 	public override void _Ready() {
@@ -22,8 +22,7 @@ public class Planet : KinematicBody2D
 		var sprite = this.GetNode<Sprite>("./Sprite");
 		sprite.Scale = new Vector2(image_to_radius_scale, image_to_radius_scale);
 		sprite.Texture = GD.Load<Texture>("res://Assets/planet.png");
-
-
+		this.distance_threshold = radius * 200 * 0;
 	}
 	
 	public override void _PhysicsProcess(float delta) {}
@@ -53,15 +52,13 @@ public class Planet : KinematicBody2D
 			vec.y = 0.2f * abs_y;
 		}
 
-		if (abs_x - mass < 0) {
+		if (distance_threshold < abs_x) {
 			vec.x = 0;
 		}
 
-		if (abs_y - mass < 0) {
+		if (distance_threshold < abs_y) {
 			vec.y = 0;
 		}
-
-		var distance = (float) Math.Sqrt(Math.Pow(difference.x, 2) + Math.Pow(difference.y, 2));
 
 		var normalized = vec.Normalized();
 		return normalized;
