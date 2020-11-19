@@ -9,11 +9,5 @@
 
 [node name="Planets" type="Node" parent="."]
 
-[node name="KinematicBody2D" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 262.359, 459.128 )
-
 [node name="KinematicBody2D2" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 521.354, 68.9533 )
-
-[node name="KinematicBody2D4" parent="Planets" instance=ExtResource( 1 )]
-position = Vector2( 815.667, 464.174 )
+position = Vector2( 872.848, 502.855 )

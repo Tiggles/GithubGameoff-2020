@@ -17,24 +17,27 @@ public class Player : Godot.KinematicBody2D
 		var player_center = new Vector2(this.Position.x, this.Position.y);
 
 		foreach (var planet in planets) {
-			vec += ((Planet) planet).GetGravityPull(player_center);
-			GD.Print(vec);
+			var result = ((Planet) planet).GetGravityPull(player_center);
+			//GD.Print(result);
+			vec += result;
 		}
 
+		GD.Print(vec);
 
+		var movement = new Vector2(0, 0);
 		if (Input.IsActionPressed("ui_up"))	{
-			vec += new Vector2(0, -movement_speed);
+			movement += new Vector2(0, -1);
 		} else if (Input.IsActionPressed("ui_down")) {
-			vec += new Vector2(0, movement_speed);
+			movement += new Vector2(0, 1);
 		}
 
 		if (Input.IsActionPressed("ui_left")) {
-			vec += new Vector2(-movement_speed, 0);
+			movement += new Vector2(-1, 0);
 		} else if (Input.IsActionPressed("ui_right")) {
-			vec += new Vector2(movement_speed, 0);
+			movement += new Vector2(1, 0);
 		}
 
-		this.MoveAndCollide(vec);
+		this.MoveAndCollide(vec + movement.Normalized() * this.movement_speed);
 		this.Rotate(rotation_speed);
 	}
 }

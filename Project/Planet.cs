@@ -22,13 +22,13 @@ public class Planet : KinematicBody2D
 		var sprite = this.GetNode<Sprite>("./Sprite");
 		sprite.Scale = new Vector2(image_to_radius_scale, image_to_radius_scale);
 		sprite.Texture = GD.Load<Texture>("res://Assets/planet.png");
-		this.distance_threshold = radius * 200 * 0;
+		this.distance_threshold = radius * 4;
 	}
 	
 	public override void _PhysicsProcess(float delta) {}
 
 	public Vector2 GetGravityPull(Vector2 player_position) {
-		var vec = new Vector2();
+		var vec = new Vector2(0, 0);
 		var planet_position = this.Position;
 
 
@@ -37,30 +37,27 @@ public class Planet : KinematicBody2D
 			this.Position.y - player_position.y
 		);
 
+
+		var distance = Math.Sqrt(Math.Pow(difference.x, 2) + Math.Pow(difference.y, 2));
+		if (distance > this.distance_threshold) return vec;
+		
+
 		var abs_x = Math.Abs(difference.x);
 		var abs_y = Math.Abs(difference.y);
-
 		if (planet_position.x < player_position.x) {
-			vec.x = -0.2f * abs_x;
+			vec.x = -0.05f * abs_x;
 		} else {
-			vec.x = 0.2f  * abs_x;
+			vec.x = 0.05f  * abs_x;
 		}
 
 		if (planet_position.y < player_position.y) {
-			vec.y = -0.2f * abs_y;
+			vec.y = -0.05f * abs_y;
 		} else {
-			vec.y = 0.2f * abs_y;
+			vec.y = 0.05f * abs_y;
 		}
 
-		if (distance_threshold < abs_x) {
-			vec.x = 0;
-		}
 
-		if (distance_threshold < abs_y) {
-			vec.y = 0;
-		}
 
-		var normalized = vec.Normalized();
-		return normalized;
+		return vec;
 	}
 }
